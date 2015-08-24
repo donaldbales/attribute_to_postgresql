@@ -2,7 +2,10 @@
 How does Ruby on Rails map it's scaffold data types to PostgreSQL?
 
 ## The Answer Is...
-<pre>rails generate scaffold test1 attribute_binary:binary attribute_boolean:boolean attribute_date:date attribute_datetime:datetime attribute_decimal:decimal attribute_float:float attribute_integer:integer attribute_string:string attribute_text:text attribute_time:time --force
+<pre>rails generate scaffold test1 attribute_binary:binary 
+attribute_boolean:boolean attribute_date:date attribute_datetime:datetime 
+attribute_decimal:decimal attribute_float:float attribute_integer:integer 
+attribute_string:string attribute_text:text attribute_time:time --force
 
       invoke  active_record
       remove    db/migrate/20150824153006_create_test1s.rb
