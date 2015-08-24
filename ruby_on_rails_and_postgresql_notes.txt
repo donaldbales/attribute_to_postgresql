@@ -1,0 +1,232 @@
+ActiveRecord::Type
+activerecord/lib/active_record/type/big_integer.rb
+activerecord/lib/active_record/type/binary.rb
+activerecord/lib/active_record/type/boolean.rb
+activerecord/lib/active_record/type/date.rb
+activerecord/lib/active_record/type/date_time.rb
+activerecord/lib/active_record/type/decimal.rb
+activerecord/lib/active_record/type/decimal_without_scale.rb
+activerecord/lib/active_record/type/decorator.rb
+activerecord/lib/active_record/type/float.rb
+activerecord/lib/active_record/type/hash_lookup_type_map.rb
+activerecord/lib/active_record/type/integer.rb
+activerecord/lib/active_record/type/mutable.rb
+activerecord/lib/active_record/type/numeric.rb
+activerecord/lib/active_record/type/serialized.rb
+activerecord/lib/active_record/type/string.rb
+activerecord/lib/active_record/type/text.rb
+activerecord/lib/active_record/type/time.rb
+activerecord/lib/active_record/type/time_value.rb
+activerecord/lib/active_record/type/type_map.rb
+activerecord/lib/active_record/type/unsigned_integer.rb
+activerecord/lib/active_record/type/value.rb
+
+
+http://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-column
+column(name, type, options = {}) Link
+Instantiates a new column for the table. The type parameter is normally one of 
+the migrations native types, which is one of the following: :primary_key, 
+:string, :text, :integer, :float, :decimal, :datetime, :time, :date, :binary, 
+:boolean.
+
+cd Work
+mkdir attribute_to_postgresql
+cd attribute_to_postgresql
+rails new attribute_to_postgresql . --database=postgresql
+psql -U postgres --command="create database attribute_to_postgresql_dev with owner don encoding = 'UTF8';"
+rem Modify database.yml setting the database to attribute_to_postgresql_dev
+
+rails generate scaffold test1 attribute_big_integer:big_integer attribute_binary:binary attribute_boolean:boolean attribute_date:date attribute_date_time:date_time attribute_decimal:decimal attribute_decimal_without_scale:decimal_without_scale attribute_decorator:decorator attribute_float:float attribute_hash_lookup_type_map:hash_lookup_type_map attribute_integer:integer attribute_mutable:mutable attribute_numeric:numeric attribute_serialized:serialized attribute_string:string attribute_text:text attribute_time:time attribute_time_value:time_value attribute_type_map:type_map attribute_unsigned_integer:unsigned_integer attribute_value:value
+rem The above failed miserably!
+
+rails generate scaffold test1 attribute_binary:binary attribute_boolean:boolean attribute_date:date attribute_datetime:datetime attribute_decimal:decimal attribute_float:float attribute_integer:integer attribute_string:string attribute_text:text attribute_time:time --force
+
+      invoke  active_record
+      remove    db/migrate/20150824153006_create_test1s.rb
+      create    db/migrate/20150824153123_create_test1s.rb
+   identical    app/models/test1.rb
+      invoke    test_unit
+   identical      test/models/test1_test.rb
+       force      test/fixtures/test1s.yml
+      invoke  resource_route
+       route    resources :test1s
+      invoke  scaffold_controller
+       force    app/controllers/test1s_controller.rb
+      invoke    erb
+       exist      app/views/test1s
+       force      app/views/test1s/index.html.erb
+   identical      app/views/test1s/edit.html.erb
+       force      app/views/test1s/show.html.erb
+   identical      app/views/test1s/new.html.erb
+       force      app/views/test1s/_form.html.erb
+      invoke    test_unit
+       force      test/controllers/test1s_controller_test.rb
+      invoke    helper
+   identical      app/helpers/test1s_helper.rb
+      invoke      test_unit
+      invoke    jbuilder
+       force      app/views/test1s/index.json.jbuilder
+       force      app/views/test1s/show.json.jbuilder
+      invoke  assets
+      invoke    coffee
+   identical      app/assets/javascripts/test1s.coffee
+      invoke    scss
+   identical      app/assets/stylesheets/test1s.scss
+      invoke  scss
+   identical    app/assets/stylesheets/scaffolds.scss
+
+C:\Users\don\Documents\Work\attribute_to_postgresql>rake db:migrate
+== 20150824153123 CreateTest1s: migrating =====================================
+-- create_table(:test1s)
+   -> 0.0720s
+== 20150824153123 CreateTest1s: migrated (0.0730s) ============================
+
+C:\Users\don\Documents\Work\attribute_to_postgresql>psql attribute_to_postgresql_dev don
+Password for user don:
+psql (9.4.4)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+attribute_to_postgresql_dev=# \d test1s
+                                         Table "public.test1s"
+       Column       |            Type             |                      Modifiers
+--------------------+-----------------------------+-----------------------------------------------------
+ id                 | integer                     | not null default nextval('test1s_id_seq'::regclass)
+ attribute_binary   | bytea                       |
+ attribute_boolean  | boolean                     |
+ attribute_date     | date                        |
+ attribute_datetime | timestamp without time zone |
+ attribute_decimal  | numeric                     |
+ attribute_float    | double precision            |
+ attribute_integer  | integer                     |
+ attribute_string   | character varying           |
+ attribute_text     | text                        |
+ attribute_time     | time without time zone      |
+ created_at         | timestamp without time zone | not null
+ updated_at         | timestamp without time zone | not null
+Indexes:
+    "test1s_pkey" PRIMARY KEY, btree (id)
+    
+rem I don't like the fact that Rails-PostgreSQL is not using time zones!
+
+http://dsthode.info/2014/10/time-zones-rails-and-postgresql-setting-things-clear/    
+rem That didn't help
+http://stackoverflow.com/questions/9571392/ignoring-timezones-altogether-in-rails-and-postgresql
+rem Perhaps. Let's do another test using timestamptz as it suggests...
+
+rails generate scaffold test2 attribute_timestamp:timestamp attribute_timestamptz:timestamptz --force
+      invoke  active_record
+      create    db/migrate/20150824160825_create_test2s.rb
+      create    app/models/test2.rb
+      invoke    test_unit
+      create      test/models/test2_test.rb
+      create      test/fixtures/test2s.yml
+      invoke  resource_route
+       route    resources :test2s
+      invoke  scaffold_controller
+      create    app/controllers/test2s_controller.rb
+      invoke    erb
+      create      app/views/test2s
+      create      app/views/test2s/index.html.erb
+      create      app/views/test2s/edit.html.erb
+      create      app/views/test2s/show.html.erb
+      create      app/views/test2s/new.html.erb
+      create      app/views/test2s/_form.html.erb
+      invoke    test_unit
+      create      test/controllers/test2s_controller_test.rb
+      invoke    helper
+      create      app/helpers/test2s_helper.rb
+      invoke      test_unit
+      invoke    jbuilder
+      create      app/views/test2s/index.json.jbuilder
+      create      app/views/test2s/show.json.jbuilder
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/test2s.coffee
+      invoke    scss
+      create      app/assets/stylesheets/test2s.scss
+      invoke  scss
+   identical    app/assets/stylesheets/scaffolds.scss
+
+C:\Users\don\Documents\Work\attribute_to_postgresql>rake db:migrate
+== 20150824160825 CreateTest2s: migrating =====================================
+-- create_table(:test2s)
+rake aborted!
+StandardError: An error has occurred, this and all later migrations canceled:
+
+undefined method `timestamptz' for #<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x000000062db3f0>C:/Users/don/Doc
+uments/Work/attribute_to_postgresql/db/migrate/20150824160825_create_test2s.rb:5:in `block in change'
+C:/Users/don/Documents/Work/attribute_to_postgresql/db/migrate/20150824160825_create_test2s.rb:3:in `change'
+C:in `migrate'
+NoMethodError: undefined method `timestamptz' for #<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x000000062db3f0>
+C:/Users/don/Documents/Work/attribute_to_postgresql/db/migrate/20150824160825_create_test2s.rb:5:in `block in change'
+C:/Users/don/Documents/Work/attribute_to_postgresql/db/migrate/20150824160825_create_test2s.rb:3:in `change'
+C:in `migrate'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+
+rem Well that didn't work!
+
+rails generate scaffold test2 attribute_timestamp_wotz:'timestamp without time zone' attribute_timestamp_wtz:'timestamp with time zone' --force
+      invoke  active_record
+      remove    db/migrate/20150824160825_create_test2s.rb
+      create    db/migrate/20150824161108_create_test2s.rb
+   identical    app/models/test2.rb
+      invoke    test_unit
+   identical      test/models/test2_test.rb
+       force      test/fixtures/test2s.yml
+      invoke  resource_route
+       route    resources :test2s
+      invoke  scaffold_controller
+       force    app/controllers/test2s_controller.rb
+      invoke    erb
+       exist      app/views/test2s
+       force      app/views/test2s/index.html.erb
+   identical      app/views/test2s/edit.html.erb
+       force      app/views/test2s/show.html.erb
+   identical      app/views/test2s/new.html.erb
+       force      app/views/test2s/_form.html.erb
+      invoke    test_unit
+       force      test/controllers/test2s_controller_test.rb
+      invoke    helper
+   identical      app/helpers/test2s_helper.rb
+      invoke      test_unit
+      invoke    jbuilder
+       force      app/views/test2s/index.json.jbuilder
+       force      app/views/test2s/show.json.jbuilder
+      invoke  assets
+      invoke    coffee
+   identical      app/assets/javascripts/test2s.coffee
+      invoke    scss
+   identical      app/assets/stylesheets/test2s.scss
+      invoke  scss
+   identical    app/assets/stylesheets/scaffolds.scss
+
+C:\Users\don\Documents\Work\attribute_to_postgresql>rake db:migrate
+== 20150824161108 CreateTest2s: migrating =====================================
+-- create_table(:test2s)
+-- zone(:attribute_timestamp_wotz)
+rake aborted!
+StandardError: An error has occurred, this and all later migrations canceled:
+
+undefined method `zone' for #<CreateTest2s:0x00000005fc9e00>C:/Users/don/Documents/Work/attribute_to_postgresql/db/migrate/201508241
+61108_create_test2s.rb:4:in `block in change'
+C:/Users/don/Documents/Work/attribute_to_postgresql/db/migrate/20150824161108_create_test2s.rb:3:in `change'
+C:in `migrate'
+NoMethodError: undefined method `zone' for #<CreateTest2s:0x00000005fc9e00>
+C:/Users/don/Documents/Work/attribute_to_postgresql/db/migrate/20150824161108_create_test2s.rb:4:in `block in change'
+C:/Users/don/Documents/Work/attribute_to_postgresql/db/migrate/20150824161108_create_test2s.rb:3:in `change'
+C:in `migrate'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
+
+rem Nope!
+rails generate scaffold test2 attribute_timestamp_wotz:'::timestamp without time zone' attribute_timestamp_wtz:'::timestamp with time zone' --force
+
+rem Nope!
+
+http://www.elabs.se/blog/36-working-with-time-zones-in-ruby-on-rails
+
+http://brendankemp.com/essays/dealing-with-time-zones-using-rails-and-postgres/

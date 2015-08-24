@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>development.log - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Gemfile.html">Gemfile</a>
+  
+    <li><a href="../Gemfile_lock.html">Gemfile.lock</a>
+  
+    <li><a href="../README_rdoc.html">README</a>
+  
+    <li><a href="../Rakefile.html">Rakefile</a>
+  
+    <li><a href="../app/assets/javascripts/application_js.html">application.js</a>
+  
+    <li><a href="../app/assets/javascripts/test1s_coffee.html">test1s.coffee</a>
+  
+    <li><a href="../app/assets/stylesheets/application_css.html">application.css</a>
+  
+    <li><a href="../app/assets/stylesheets/scaffolds_scss.html">scaffolds.scss</a>
+  
+    <li><a href="../app/assets/stylesheets/test1s_scss.html">test1s.scss</a>
+  
+    <li><a href="../app/views/test1s/index_json_jbuilder.html">index.json.jbuilder</a>
+  
+    <li><a href="../app/views/test1s/show_json_jbuilder.html">show.json.jbuilder</a>
+  
+    <li><a href="../config_ru.html">config.ru</a>
+  
+    <li><a href="../log/development_log.html">development.log</a>
+  
+    <li><a href="../public/404_html.html">404.html</a>
+  
+    <li><a href="../public/422_html.html">422.html</a>
+  
+    <li><a href="../public/500_html.html">500.html</a>
+  
+    <li><a href="../public/favicon_ico.html">favicon.ico</a>
+  
+    <li><a href="../public/robots_txt.html">robots</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page log/development.log">
+
+<pre>[1m[36m (42.0ms)[0m  [1mCREATE TABLE &quot;schema_migrations&quot; (&quot;version&quot; character varying NOT NULL) [0m
+[1m[35m (39.0ms)[0m  CREATE UNIQUE INDEX  &quot;unique_schema_migrations&quot; ON &quot;schema_migrations&quot;  (&quot;version&quot;)
+[1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT &quot;schema_migrations&quot;.* FROM &quot;schema_migrations&quot;[0m</pre>
+
+<p>Migrating to <a href="../CreateTest1s.html">CreateTest1s</a>
+(20150824152339)</p>
+
+<pre>[1m[35m (1.0ms)[0m  BEGIN
+[1m[36m (0.0ms)[0m  [1mROLLBACK[0m
+[1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT &quot;schema_migrations&quot;.* FROM &quot;schema_migrations&quot;[0m</pre>
+
+<p>Migrating to <a href="../CreateTest1s.html">CreateTest1s</a>
+(20150824153006)</p>
+
+<pre>[1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT &quot;schema_migrations&quot;.* FROM &quot;schema_migrations&quot;[0m</pre>
+
+<p>Migrating to <a href="../CreateTest1s.html">CreateTest1s</a>
+(20150824153123)</p>
+
+<pre>[1m[35m (0.0ms)[0m  BEGIN
+[1m[36m (71.0ms)[0m  [1mCREATE TABLE &quot;test1s&quot; (&quot;id&quot; serial primary key, &quot;attribute_binary&quot; bytea, &quot;attribute_boolean&quot; boolean, &quot;attribute_date&quot; date, &quot;attribute_datetime&quot; timestamp, &quot;attribute_decimal&quot; decimal, &quot;attribute_float&quot; float, &quot;attribute_integer&quot; integer, &quot;attribute_string&quot; character varying, &quot;attribute_text&quot; text, &quot;attribute_time&quot; time, &quot;created_at&quot; timestamp NOT NULL, &quot;updated_at&quot; timestamp NOT NULL) [0m
+[1m[35mSQL (1.0ms)[0m  INSERT INTO &quot;schema_migrations&quot; (&quot;version&quot;) VALUES ($1)  [[&quot;version&quot;, &quot;20150824153123&quot;]]
+[1m[36m (30.0ms)[0m  [1mCOMMIT[0m
+[1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT &quot;schema_migrations&quot;.* FROM &quot;schema_migrations&quot;
+[1m[36m (3.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete</pre>
+
+<p>FROM pg_constraint c JOIN pg_class t1 ON c.conrelid = t1.oid JOIN pg_class
+t2 ON c.confrelid = t2.oid JOIN pg_attribute a1 ON a1.attnum = <a
+href="1">c.conkey</a> AND a1.attrelid = t1.oid JOIN pg_attribute a2 ON
+a2.attnum = <a href="1">c.confkey</a> AND a2.attrelid = t2.oid JOIN
+pg_namespace t3 ON c.connamespace = t3.oid WHERE c.contype = &#39;f&#39;</p>
+
+<pre>AND t1.relname = &#39;test1s&#39;
+AND t3.nspname = ANY (current_schemas(false))</pre>
+
+<p>ORDER BY c.conname [0m</p>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
